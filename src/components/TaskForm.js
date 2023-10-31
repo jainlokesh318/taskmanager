@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { v4 as uuid } from 'uuid';
 
 function TextInput({ type, id, value, setValue, placeholder }) {
@@ -18,13 +18,20 @@ export default function TaskForm({ handleSubmit, taskToEdit }) {
 
     const handleFormSubmission = (e) => {
         e.preventDefault();
-        const task = {
-            id: uuid(),
+        const taskToAdd = {
+            id: taskToEdit ? taskToEdit?.id : uuid(),
             title, description, status
         }
-        handleSubmit(task);
-        resetForm()
+        handleSubmit(taskToAdd);
+        resetForm();
     }
+
+    useEffect(() => {
+        if (taskToEdit) {
+            setTitle(taskToEdit?.title)
+            setDescription(taskToEdit?.description)
+        }
+    }, [taskToEdit])
 
     return (
         <form onSubmit={handleFormSubmission} className="flex flex-col gap-4 m-2">
@@ -37,7 +44,7 @@ export default function TaskForm({ handleSubmit, taskToEdit }) {
                 <label htmlFor="title">Description</label>
                 <TextInput type="text" value={description} placeholder="Enter Description" setValue={e => setDescription(e.target.value)} />
             </div>
-            <button disabled={!areFieldsPopulated} type="submit" className="border rounded px-4 disabled:opacity-50 disabled:cursor-not-allowed bg-orange-300">Add Task</button>
+            <button disabled={!areFieldsPopulated} type="submit" className="border rounded px-4 disabled:opacity-50 disabled:cursor-not-allowed bg-orange-300">{`${taskToEdit ? "Update" : "Add"} Task`}</button>
         </form>
     )
 }
