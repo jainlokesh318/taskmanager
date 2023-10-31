@@ -10,10 +10,14 @@ export default function TaskManager() {
         setTasksList(prev => [...prev, task])
     }
 
+    const handleDelete = (taskToDelete) => {
+        setTasksList(prev => prev?.filter(task => task?.id !== taskToDelete?.id))
+    }
+
     return (
         <>
             <TaskForm handleSubmit={handleSubmit} taskToEdit={taskToEdit} />
-            <TasksListPreviewer tasksList={tasksList} />
+            <TasksListPreviewer tasksList={tasksList} handleDelete={handleDelete} />
         </>
     )
 }
