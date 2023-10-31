@@ -11,6 +11,11 @@ export default function TaskForm({ handleSubmit, taskToEdit }) {
     const [status, setStatus] = useState("")
     const areFieldsPopulated = title.length > 0 && description.length > 0
 
+    const resetForm = () => {
+        setTitle("")
+        setDescription("")
+    }
+
     const handleFormSubmission = (e) => {
         e.preventDefault();
         const task = {
@@ -18,6 +23,7 @@ export default function TaskForm({ handleSubmit, taskToEdit }) {
             title, description, status
         }
         handleSubmit(task);
+        resetForm()
     }
 
     return (
