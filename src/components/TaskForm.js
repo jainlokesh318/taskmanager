@@ -5,7 +5,7 @@ function TextInput({ type, id, value, setValue, placeholder }) {
     return <input className="border p-2" type={type} id={id} value={value} onChange={setValue} placeholder={placeholder} />
 }
 
-const statusOptions = [{
+export const statusOptions = [{
     label: "Todo",
     value: "Todo"
 },
