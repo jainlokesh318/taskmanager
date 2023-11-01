@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { statusOptions } from "./TaskForm"
+import Filters from "./Filters"
 
 function TaskItem({ task, handleDelete, handleEdit }) {
     return (
@@ -18,7 +18,6 @@ function TaskItem({ task, handleDelete, handleEdit }) {
 }
 
 export default function TasksListPreviewer({ tasksList, handleDelete, handleEdit }) {
-    let [filteredTasks, setFilteredTasks] = useState([])
     let [filters, setFilters] = useState({ status: [] })
 
     console.log({ filters })
@@ -44,20 +43,21 @@ export default function TasksListPreviewer({ tasksList, handleDelete, handleEdit
         }
     }
 
+    const filteredItems = tasksList.filter(item => {
+        if (filters.status.length === 0) {
+            // If no status checkboxes are selected, return all items
+            return true;
+        } else {
+            // Filter items based on selected status checkboxes
+            return filters.status.includes(item.status);
+        }
+    });
+
     return (
         <>
-            <div className="flex gap-3" onChange={handleFilterChange}>
-                {
-                    statusOptions.map(statusOption =>
-                        <div key={statusOption.value}>
-                            <input type="checkbox" id={statusOption.value} name="status" value={statusOption.value}></input>
-                            <label className="mx-1" htmlFor={statusOption.value} >{statusOption.label}</label>
-                        </div>
-                    )
-                }
-            </div>
+            <Filters handleFilterChange={handleFilterChange} />
             {
-                tasksList?.map(task => {
+                filteredItems?.map(task => {
                     return <TaskItem task={task} key={task?.id} handleDelete={handleDelete} handleEdit={handleEdit} />
                 })
             }
