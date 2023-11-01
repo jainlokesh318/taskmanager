@@ -30,7 +30,7 @@ export default function TaskManager() {
     }
 
     return (
-        <div className="flex items-center justify-center flex-col overflow-hidden">
+        <div className="flex items-center justify-center flex-col md:flex-row overflow-hidden m-2 h-screen">
             <TaskForm handleSubmit={handleSubmit} taskToEdit={taskToEdit} />
             <TasksListPreviewer tasksList={tasksList} handleDelete={handleDelete} handleEdit={handleEdit} />
         </div>

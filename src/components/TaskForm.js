@@ -50,7 +50,7 @@ export default function TaskForm({ handleSubmit, taskToEdit }) {
     }, [taskToEdit])
 
     return (
-        <form onSubmit={handleFormSubmission} className="flex flex-col gap-4 m-2">
+        <form onSubmit={handleFormSubmission} className="flex items-center justify-center flex-col gap-4 p-2 border-gray-500 border-dashed border">
             <div className="grid grid-cols-2">
                 <label htmlFor="title">Title</label>
                 <TextInput type="text" id="title" value={title} placeholder="Enter title" setValue={e => setTitle(e.target.value)} />

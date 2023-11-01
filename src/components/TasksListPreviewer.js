@@ -3,7 +3,7 @@ import Filters from "./Filters"
 
 function TaskItem({ task, handleDelete, handleEdit }) {
     return (
-        <div className="flex justify-between border shadow w-1/2 p-4 my-2">
+        <div className="flex justify-between border shadow w-full md:w-1/2 p-4 my-2">
             <div>
                 <h2 className="text-2xl">{task?.title}</h2>
                 <p>{task?.description}</p>
@@ -19,8 +19,6 @@ function TaskItem({ task, handleDelete, handleEdit }) {
 
 export default function TasksListPreviewer({ tasksList, handleDelete, handleEdit }) {
     let [filters, setFilters] = useState({ status: [] })
-
-    console.log({ filters })
 
     const handleFilterChange = (e) => {
         const { value, checked, name, type } = e.target
@@ -54,13 +52,14 @@ export default function TasksListPreviewer({ tasksList, handleDelete, handleEdit
     });
 
     return (
-        <>
+        <div className="flex flex-col items-center justify-between flex-1">
+            <h1 className="text-2xl my-3">Tasks List</h1>
             <Filters handleFilterChange={handleFilterChange} />
             {
                 filteredItems?.map(task => {
                     return <TaskItem task={task} key={task?.id} handleDelete={handleDelete} handleEdit={handleEdit} />
                 })
             }
-        </>
+        </div>
     )
 }
