@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import TaskForm from "./TaskForm";
 import TasksListPreviewer from "./TasksListPreviewer"
 import { addTaskToDB, deleteTaskFromDB, fetchTasksFromDB, updateTaskToDB } from "../services/TaskManagerAPIUtils";
+import RenderIf from "./RenderIf";
 
 export default function TaskManager() {
     let [tasksList, setTasksList] = useState([])
@@ -39,9 +40,11 @@ export default function TaskManager() {
     }
 
     return (
-        <div className="flex items-center justify-center flex-col md:flex-row overflow-hidden m-2 h-screen">
+        <div className="grid grid-cols-1 md:grid-cols-3 items-center justify-center m-2">
             <TaskForm handleSubmit={handleSubmit} taskToEdit={taskToEdit} />
-            <TasksListPreviewer tasksList={tasksList} handleDelete={handleDelete} handleEdit={handleEdit} />
+            <RenderIf condition={tasksList.length > 0}>
+                <TasksListPreviewer tasksList={tasksList} handleDelete={handleDelete} handleEdit={handleEdit} />
+            </RenderIf>
         </div>
     )
 }
