@@ -47,7 +47,7 @@ export default function TaskForm({ handleSubmit, taskToEdit }) {
     }, [taskToEdit])
 
     return (
-        <form onSubmit={handleFormSubmission} className="flex items-center justify-center flex-col gap-4 p-2 border-gray-500 border-dashed border">
+        <form onSubmit={handleFormSubmission} className="flex items-center justify-center flex-col gap-4 p-2 border-gray-500 border-dashed border justify-self-center h-min">
             <TextInput
                 type="text"
                 id="title"

@@ -40,7 +40,7 @@ export default function TaskManager() {
     }
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 items-center justify-center m-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 m-2 h-screen">
             <TaskForm handleSubmit={handleSubmit} taskToEdit={taskToEdit} />
             <RenderIf condition={tasksList.length > 0}>
                 <TasksListPreviewer tasksList={tasksList} handleDelete={handleDelete} handleEdit={handleEdit} />
