@@ -62,16 +62,21 @@ export default function TaskForm({ handleSubmit, taskToEdit }) {
             </div>
             <div>
                 <label htmlFor="status">Status</label>
-                <div onChange={e => setStatus(e.target.value)} className="flex justify-between">
+                <div className="flex justify-between">
                     {
-                        statusOptions.map((statusOption) => <div key={statusOption.value}>
-                            <input type="radio" checked={status === statusOption.value} value={statusOption.value} id={statusOption.label} name="status" />
-                            <label className="mx-2" htmlFor={statusOption.label}>{statusOption.label}</label>
-                        </div>)
+                        statusOptions.map((statusOption) =>
+                            <div key={statusOption.value}>
+                                <input
+                                    type="radio"
+                                    checked={status === statusOption.value}
+                                    value={statusOption.value}
+                                    id={statusOption.label}
+                                    name="status"
+                                    onChange={e => setStatus(e.target.value)}
+                                />
+                                <label className="mx-2" htmlFor={statusOption.label}>{statusOption.label}</label>
+                            </div>)
                     }
-                    {/* <input type="radio" value="Todo" name="status" /> Todo
-                    <input type="radio" value="InProgress" name="status" /> InProgress
-                    <input type="radio" value="Done" name="status" /> Done */}
                 </div>
             </div>
             <button disabled={!areFieldsPopulated} type="submit" className="border rounded px-4 disabled:opacity-50 disabled:cursor-not-allowed bg-orange-300">{`${taskToEdit ? "Update" : "Add"} Task`}</button>
