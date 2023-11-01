@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 function TaskItem({ task, handleDelete, handleEdit }) {
     return (
         <div className="flex justify-between border shadow w-full p-4 m-4">
@@ -10,13 +8,13 @@ function TaskItem({ task, handleDelete, handleEdit }) {
             <div className="flex flex-col gap-4">
                 <button className="border rounded px-4 bg-orange-300" onClick={_ => handleEdit(task)}>Update</button>
                 <button className="border rounded px-4 bg-red-300" onClick={_ => handleDelete(task)}>Delete</button>
+                <span>{task?.status}</span>
             </div>
         </div>
     )
 }
 
 export default function TasksListPreviewer({ tasksList, handleDelete, handleEdit }) {
-
     return (
         <div>
             {

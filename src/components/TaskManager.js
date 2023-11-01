@@ -30,9 +30,9 @@ export default function TaskManager() {
     }
 
     return (
-        <>
+        <div className="flex items-center justify-center flex-col">
             <TaskForm handleSubmit={handleSubmit} taskToEdit={taskToEdit} />
             <TasksListPreviewer tasksList={tasksList} handleDelete={handleDelete} handleEdit={handleEdit} />
-        </>
+        </div>
     )
 }
