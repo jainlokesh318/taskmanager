@@ -1,15 +1,22 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import TaskForm from "./TaskForm";
 import TasksListPreviewer from "./TasksListPreviewer"
+import { addTaskToDB, deleteTaskFromDB, fetchTasksFromDB, updateTaskToDB } from "../services/TaskManagerAPIUtils";
 
 export default function TaskManager() {
     let [tasksList, setTasksList] = useState([])
     let [taskToEdit, setTaskToEdit] = useState(undefined);
 
+    useEffect(() => {
+        const unsubscribe = fetchTasksFromDB(setTasksList);
+        return unsubscribe
+    }, [])
+
     const handleSubmit = (taskToAdd) => {
         if (taskToEdit) {
             setTasksList(prev => prev?.map(taskItem => {
                 if (taskItem?.id === taskToAdd?.id) {
+                    updateTaskToDB(taskToAdd)
                     return taskToAdd
                 } else {
                     return taskItem
@@ -17,11 +24,13 @@ export default function TaskManager() {
             }))
             setTaskToEdit(undefined)
         } else {
+            addTaskToDB(taskToAdd)
             setTasksList(prev => [...prev, taskToAdd])
         }
     }
 
     const handleDelete = (taskToDelete) => {
+        deleteTaskFromDB(taskToDelete);
         setTasksList(prev => prev?.filter(task => task?.id !== taskToDelete?.id))
     }
 
